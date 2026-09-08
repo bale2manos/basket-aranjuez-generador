@@ -8,3 +8,4 @@ release/
 output/*
 !output/.gitkeep
 logs/
+logos/*.pdf
