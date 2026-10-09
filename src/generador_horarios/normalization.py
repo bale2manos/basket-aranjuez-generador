@@ -134,7 +134,11 @@ def parse_category(category: str) -> CategoryInfo:
 
     if "SUB" in tokens and "22" in tokens or "SUB22" in tokens:
         base = "Sub22"
-    elif "2A" in tokens and "DIV" in tokens and "AUT" in tokens or "SENIOR" in tokens:
+    elif (
+        "2A" in tokens and "DIV" in tokens and "AUT" in tokens
+        or "SENIOR" in tokens
+        or "GINOS" in tokens
+    ):
         base = "Senior"
     elif "ALV" in tokens or "ALEVIN" in tokens:
         base = "Alev\u00edn"
@@ -185,7 +189,14 @@ def _find_series_letter(category_info: CategoryInfo, team_name: str) -> str | No
     if "B" in tokens:
         return "B"
 
+    if category_info.base == "Junior":
+        for letter in ("C", "D"):
+            if letter in tokens:
+                return letter
+
     if category_info.base == "Senior":
+        if "GINOS" in category_info.normalized and category_info.gender == "Fem":
+            return "A"
         if "ORO" in category_info.normalized:
             return "A"
         if "PLATA" in category_info.normalized or "BRONCE" in category_info.normalized:

@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $dist = Join-Path $root "dist\BasketAranjuezGenerador"
 $release = Join-Path $root "release"
-$version = "1.0.0"
+$version = "1.0.1"
 $zip = Join-Path $release "BasketAranjuezGenerador-v$version-windows.zip"
 
 if (Test-Path (Join-Path $root "build")) { Remove-Item (Join-Path $root "build") -Recurse -Force }

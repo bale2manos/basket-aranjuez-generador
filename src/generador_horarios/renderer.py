@@ -61,9 +61,27 @@ def _cover_image(image: Image.Image, size: tuple[int, int]) -> Image.Image:
     return resized.crop((left, top, left + dst_width, top + dst_height))
 
 
+def _trim_black_left_border(image: Image.Image) -> Image.Image:
+    rgb = image.convert("RGB")
+    max_trim = min(32, rgb.width // 50)
+    trim = 0
+    sample_step = max(1, rgb.height // 240)
+
+    for x in range(max_trim):
+        if all(max(rgb.getpixel((x, y))) <= 8 for y in range(0, rgb.height, sample_step)):
+            trim = x + 1
+        else:
+            break
+
+    if not trim:
+        return image
+    return image.crop((trim, 0, image.width, image.height))
+
+
 def _load_background(background_path: Path, logger: logging.Logger, size: tuple[int, int]) -> Image.Image:
     if background_path.exists():
         with Image.open(background_path) as image:
+            image = _trim_black_left_border(image.convert("RGBA"))
             grayscale = image.convert("L").filter(ImageFilter.GaussianBlur(BACKGROUND_BLUR_RADIUS)).convert("RGBA")
             return _cover_image(grayscale, size)
 
