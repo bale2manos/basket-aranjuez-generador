@@ -36,6 +36,10 @@ class AppConfig:
     results_doc_path: Path | None = None
     results_overrides_path: Path | None = None
     max_per_page: int = 8
+    number_font_path: Path | None = None
+    cover_title_font_path: Path | None = None
+    cover_date_font_path: Path | None = None
+    cover_dark_overlay_opacity: float = 0.65
 
 
 def default_config() -> AppConfig:
@@ -44,7 +48,7 @@ def default_config() -> AppConfig:
         background_image_path=BASE_DIR / "foto.png",
         header_overlay_path=BASE_DIR / "header.png",
         logos_dir=BASE_DIR / "logos",
-        font_path=BASE_DIR / "fonts" / "Poppins-Bold.ttf",
+        font_path=BASE_DIR / "fonts" / "Barlow-Bold.ttf",
         output_root_dir=BASE_DIR / "output",
         basket_logo_path=BASE_DIR / "logos" / "basket_aranjuez.png",
         club_logo_map_path=BASE_DIR / "data" / "club_logo_map.csv",
@@ -58,6 +62,10 @@ def default_config() -> AppConfig:
         results_doc_path=None,
         results_overrides_path=BASE_DIR / "data" / "result_overrides.json",
         max_per_page=8,
+        number_font_path=BASE_DIR / "fonts" / "kvant-trial-bold.otf",
+        cover_title_font_path=BASE_DIR / "fonts" / "kvant-trial-bold.otf",
+        cover_date_font_path=BASE_DIR / "fonts" / "Amoresa Aged.otf",
+        cover_dark_overlay_opacity=0.65,
     )
 
 

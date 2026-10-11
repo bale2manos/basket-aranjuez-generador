@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from .models import MatchRecord, RenderMode
+from .design import DESIGN_VERSION, SEASON
 
 
 def _serialize_match(record: MatchRecord) -> dict[str, object]:
@@ -41,6 +42,8 @@ def write_summary(
     results_overrides_path: Path | None,
 ) -> Path:
     payload = {
+        "design_version": DESIGN_VERSION,
+        "season": SEASON,
         "source_excel": str(source_excel),
         "output_dir": str(output_dir),
         "generated_at": datetime.now().astimezone().isoformat(),

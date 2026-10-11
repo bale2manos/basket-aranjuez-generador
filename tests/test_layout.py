@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw
 from generador_horarios.layout import CANVAS_SIZE, fit_text_block, get_match_slots
 
 
-FONT_PATH = ROOT / "Poppins-Bold.ttf"
+FONT_PATH = ROOT / "fonts" / "Barlow-Bold.ttf"
 
 
 class LayoutTests(unittest.TestCase):

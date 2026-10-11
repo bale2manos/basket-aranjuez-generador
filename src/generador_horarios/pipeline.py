@@ -3,6 +3,7 @@
 from collections.abc import Iterable
 from datetime import date
 import logging
+import sys
 from pathlib import Path
 
 from config import AppConfig
@@ -21,6 +22,7 @@ from .excel_reader import load_matches
 from .models import MatchRecord, PageSpec, PipelineResult
 from .normalization import detect_match_type, derive_basket_display_name
 from .renderer import render_page
+from .resources import validate_render_assets
 from .results import (
     build_match_key,
     load_result_overrides,
@@ -37,9 +39,10 @@ def _build_logger() -> logging.Logger:
     logger.handlers.clear()
     logger.propagate = False
 
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(logging.Formatter("%(levelname)s - %(message)s"))
-    logger.addHandler(console_handler)
+    if sys.stderr is not None:
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(logging.Formatter("%(levelname)s - %(message)s"))
+        logger.addHandler(console_handler)
     return logger
 
 
@@ -193,6 +196,7 @@ def _build_pages(output_dir: Path, records: list[MatchRecord], max_per_page: int
 
 
 def run_pipeline(config: AppConfig) -> PipelineResult:
+    validate_render_assets(config)
     ensure_directory(config.output_root_dir)
     logger = _build_logger()
     try:

@@ -109,7 +109,7 @@ class PipelineTests(unittest.TestCase):
             logos_dir = base / "logos"
             output_dir = base / "output"
             data_dir = base / "data"
-            font_path = ROOT / "Poppins-Bold.ttf"
+            font_path = ROOT / "fonts" / "Barlow-Bold.ttf"
             cover_font_bold_path = ROOT / "fonts" / "Poppins-Bold.ttf"
             cover_font_italic_path = ROOT / "fonts" / "Poppins-BoldItalic.ttf"
             basket_logo_path = logos_dir / "basket_aranjuez.png"
@@ -147,6 +147,9 @@ class PipelineTests(unittest.TestCase):
                 header_overlay_path=header_path,
                 logos_dir=logos_dir,
                 font_path=font_path,
+                number_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_title_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_date_font_path=ROOT / "fonts" / "Amoresa Aged.otf",
                 output_root_dir=output_dir,
                 basket_logo_path=basket_logo_path,
                 club_logo_map_path=club_map_path,
@@ -174,6 +177,8 @@ class PipelineTests(unittest.TestCase):
             summary = json.loads((result.output_dir / "summary.json").read_text(encoding="utf-8"))
             self.assertIn("rendered_missing_logo", json.dumps(summary, ensure_ascii=False))
             self.assertIn("Liceo Franc\u00e9s, Pabell\u00f3n", json.dumps(summary, ensure_ascii=False))
+            self.assertEqual(summary["design_version"], "2.0")
+            self.assertEqual(summary["season"], "2026/27")
             self.assertEqual(summary["render_mode"], "horarios")
             self.assertEqual(summary["images"][0]["page_type"], "cover")
             self.assertEqual(summary["images"][0]["output_image"], "portada.png")
@@ -188,7 +193,7 @@ class PipelineTests(unittest.TestCase):
             logos_dir = base / "logos"
             output_dir = base / "output"
             data_dir = base / "data"
-            font_path = ROOT / "Poppins-Bold.ttf"
+            font_path = ROOT / "fonts" / "Barlow-Bold.ttf"
             cover_font_bold_path = ROOT / "fonts" / "Poppins-Bold.ttf"
             cover_font_italic_path = ROOT / "fonts" / "Poppins-BoldItalic.ttf"
             basket_logo_path = logos_dir / "basket_aranjuez.png"
@@ -229,6 +234,9 @@ class PipelineTests(unittest.TestCase):
                 header_overlay_path=header_path,
                 logos_dir=logos_dir,
                 font_path=font_path,
+                number_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_title_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_date_font_path=ROOT / "fonts" / "Amoresa Aged.otf",
                 output_root_dir=output_dir,
                 basket_logo_path=basket_logo_path,
                 club_logo_map_path=club_map_path,
@@ -259,7 +267,7 @@ class PipelineTests(unittest.TestCase):
             logos_dir = base / "logos"
             output_dir = base / "output"
             data_dir = base / "data"
-            font_path = ROOT / "Poppins-Bold.ttf"
+            font_path = ROOT / "fonts" / "Barlow-Bold.ttf"
             cover_font_bold_path = ROOT / "fonts" / "Poppins-Bold.ttf"
             cover_font_italic_path = ROOT / "fonts" / "Poppins-BoldItalic.ttf"
             basket_logo_path = logos_dir / "basket_aranjuez.png"
@@ -306,6 +314,9 @@ class PipelineTests(unittest.TestCase):
                 header_overlay_path=header_path,
                 logos_dir=logos_dir,
                 font_path=font_path,
+                number_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_title_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_date_font_path=ROOT / "fonts" / "Amoresa Aged.otf",
                 output_root_dir=output_dir,
                 basket_logo_path=basket_logo_path,
                 club_logo_map_path=club_map_path,
@@ -349,7 +360,7 @@ class PipelineTests(unittest.TestCase):
             logos_dir = base / "logos"
             output_dir = base / "output"
             data_dir = base / "data"
-            font_path = ROOT / "Poppins-Bold.ttf"
+            font_path = ROOT / "fonts" / "Barlow-Bold.ttf"
             cover_font_bold_path = ROOT / "fonts" / "Poppins-Bold.ttf"
             cover_font_italic_path = ROOT / "fonts" / "Poppins-BoldItalic.ttf"
             basket_logo_path = logos_dir / "basket_aranjuez.png"
@@ -395,6 +406,9 @@ class PipelineTests(unittest.TestCase):
                 header_overlay_path=header_path,
                 logos_dir=logos_dir,
                 font_path=font_path,
+                number_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_title_font_path=ROOT / "fonts" / "kvant-trial-bold.otf",
+                cover_date_font_path=ROOT / "fonts" / "Amoresa Aged.otf",
                 output_root_dir=output_dir,
                 basket_logo_path=basket_logo_path,
                 club_logo_map_path=club_map_path,

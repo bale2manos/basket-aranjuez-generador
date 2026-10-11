@@ -25,6 +25,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--header-overlay-path", type=Path)
     parser.add_argument("--logos-dir", type=Path)
     parser.add_argument("--font-path", type=Path)
+    parser.add_argument("--number-font-path", type=Path)
+    parser.add_argument("--cover-title-font-path", type=Path)
+    parser.add_argument("--cover-date-font-path", type=Path)
+    parser.add_argument("--cover-dark-overlay-opacity", type=float)
     parser.add_argument("--output-root-dir", type=Path)
     parser.add_argument("--basket-logo-path", type=Path)
     parser.add_argument("--club-logo-map-path", type=Path)
@@ -52,6 +56,10 @@ def build_runtime_config(args: argparse.Namespace) -> AppConfig:
         header_overlay_path=resolve_path(args.header_overlay_path),
         logos_dir=resolve_path(args.logos_dir),
         font_path=resolve_path(args.font_path),
+        number_font_path=resolve_path(args.number_font_path),
+        cover_title_font_path=resolve_path(args.cover_title_font_path),
+        cover_date_font_path=resolve_path(args.cover_date_font_path),
+        cover_dark_overlay_opacity=args.cover_dark_overlay_opacity,
         output_root_dir=resolve_path(args.output_root_dir),
         basket_logo_path=resolve_path(args.basket_logo_path),
         club_logo_map_path=resolve_path(args.club_logo_map_path),
@@ -65,7 +73,10 @@ def build_runtime_config(args: argparse.Namespace) -> AppConfig:
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    result = run_pipeline(build_runtime_config(args))
+    try:
+        result = run_pipeline(build_runtime_config(args))
+    except (ValueError, OSError) as exc:
+        parser.exit(1, f"Error: {exc}\n")
     print(f"Modo: {result.render_mode}")
     print(f"Carpeta generada: {result.output_dir}")
     print(f"Imagenes creadas: {len(result.images)}")

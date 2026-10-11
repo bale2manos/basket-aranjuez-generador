@@ -54,6 +54,11 @@ class NormalizationTests(unittest.TestCase):
         display = derive_basket_display_name("2\u00aa Div Aut Masc PLATA", "BASKET ARANJUEZ")
         self.assertEqual(display, "Senior Masc B")
 
+    def test_version_101_team_names_are_preserved(self) -> None:
+        self.assertEqual(derive_basket_display_name("Junior Masc. Pref.", "BASKET ARANJUEZ C"), "Junior Masc C")
+        self.assertEqual(derive_basket_display_name("Junior Masc. Pref.", "BASKET ARANJUEZ D"), "Junior Masc D")
+        self.assertEqual(derive_basket_display_name("Liga Ginos Femenina", "BASKET ARANJUEZ"), "Senior Fem A")
+
     def test_clean_venue_name(self) -> None:
         self.assertEqual(clean_venue_name("LAS OLIVAS, CIUDAD DEPORTIVA"), "Las Olivas")
         self.assertEqual(
